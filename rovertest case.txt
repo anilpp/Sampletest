@@ -1,0 +1,58 @@
+public class RoverTest
+ {
+   
+  @Test
+  public void testDirectionAndPositionInitialization() 
+  {        
+     Rover rover = new Rover(); 
+     rover.setPosition(1, 2, Rover.N);        
+     assertEquals(1, rover.x);
+     assertEquals(2, rover.y);
+     assertEquals(Rover.N, rover.facing);    
+  }
+    
+  @Test    
+  public void testMovingRoverPosition() 
+  {       
+       Rover rover = new Rover();        
+       rover.setPosition(1, 2, Rover.N);        
+       rover.move();        
+       assertEquals(1, rover.x);
+       assertEquals(3, rover.y);   
+   }
+    
+   @Test   
+    public void testGivenScenarioProblem() 
+     {
+       Rover rover = new Rover();
+       rover.setPosition(1, 2, Rover.N);
+       rover.process("LMLMLMLMM");
+       assertEquals("1 3 N", getPositionString(rover));
+
+       rover.setPosition(3, 3, Rover.E);        
+       rover.process("MMRMMRMRRM"); 
+       assertEquals("5 1 E", getPositionString(rover));    
+      }
+    
+     private String getPositionString(Rover rover) 
+      {        
+           char dir = 'N';       
+           if (rover.facing == Rover.N)
+            {            
+            dir = 'N';        
+            }
+           else if (rover.facing == Rover.E) 
+             {
+               dir = 'E';        
+             } 
+           else if (rover.facing == Rover.S) 
+             {
+                dir = 'S';        
+             } 
+           else if (rover.facing == Rover.W) 
+             {    
+               dir = 'W';        
+             }    
+           return rover.x + " " + rover.y + " " + dir;    
+        }
+}
